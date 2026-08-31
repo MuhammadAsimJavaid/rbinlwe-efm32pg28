@@ -1,0 +1,87 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: RBLWE_on_EFM32_ShAd_CBD0
+label: RBLWE_on_EFM32_ShAd_CBD0
+description: |
+  This example project shows an empty configuration that can be used as a starting point to add components and functionality.
+category: Example|Platform
+filter:
+- name: Device Type
+  value:
+  - SoC
+- name: MCU
+  value:
+  - 32-bit MCU
+- name: Project Difficulty
+  value:
+  - Beginner
+package: platform
+quality: production
+readme:
+- path: readme.md
+source:
+- path: app.c
+include:
+- path: .
+  file_list:
+  - path: app.h
+sdk:
+  vendor: silabs
+  id: simplicity_sdk
+  version: 2025.12.2
+toolchain_settings: [
+  ]
+component:
+- package: simplicity_sdk
+  vendor: silabs
+  id: EFM32PG28B310F1024IM68
+- package: simplicity_sdk
+  vendor: silabs
+  id: brd2506a
+- package: simplicity_sdk
+  vendor: silabs
+  id: clock_manager
+- package: simplicity_sdk
+  vendor: silabs
+  id: cycle_counter
+- package: simplicity_sdk
+  vendor: silabs
+  id: device_init
+- package: simplicity_sdk
+  vendor: silabs
+  id: emlib_usart
+- package: simplicity_sdk
+  vendor: silabs
+  id: hal_usart
+- package: simplicity_sdk
+  vendor: silabs
+  id: iostream
+- package: simplicity_sdk
+  vendor: silabs
+  id: iostream_retarget_stdio
+- package: simplicity_sdk
+  instance:
+  - vcom
+  vendor: silabs
+  id: iostream_usart
+- package: simplicity_sdk
+  vendor: silabs
+  id: math_mvp
+- package: simplicity_sdk
+  vendor: silabs
+  id: mbedtls_random
+- package: simplicity_sdk
+  vendor: silabs
+  id: psa_crypto
+- package: simplicity_sdk
+  vendor: silabs
+  id: sl_main
+- package: simplicity_sdk
+  vendor: silabs
+  id: sleeptimer
+define:
+- name: DEBUG_EFM
+ui_hints:
+  highlight:
+  - path: readme.md
+    focus: true
+

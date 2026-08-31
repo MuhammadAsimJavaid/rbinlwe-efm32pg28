@@ -1,0 +1,20 @@
+{
+  "masked": {
+    "total_traces": 5000,
+    "class_0": 2505,
+    "class_1": 2495,
+    "max_abs_t": 3.5657506208820826,
+    "peak_sample": 6239,
+    "peak_time_ms": 0.8458,
+    "samples_above_4_5": 0
+  },
+  "unmasked": {
+    "total_traces": 5000,
+    "class_0": 2525,
+    "class_1": 2475,
+    "max_abs_t": 6.146411882487625,
+    "peak_sample": 5540,
+    "peak_time_ms": 0.7060000000000001,
+    "samples_above_4_5": 19
+  }
+}

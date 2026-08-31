@@ -1,0 +1,22 @@
+{
+  "completed_valid_traces": 5000,
+  "rejected_log_rows": 0,
+  "rejected_trigger_edge_outliers": 0,
+  "class_0": 2500,
+  "class_1": 2500,
+  "alignment_target_edge": 7499,
+  "edge_min": 7499,
+  "edge_max": 7499,
+  "analyzed_samples": 25000,
+  "threshold": 4.5,
+  "first_order_max_abs_t": 3.8674511612970535,
+  "first_order_peak_sample_index": 3675,
+  "first_order_peak_time_from_trigger_s": -0.03824,
+  "first_order_samples_above_threshold": 0,
+  "first_order_threshold_exceeded": false,
+  "second_order_max_abs_t": 3.309377834478592,
+  "second_order_peak_sample_index": 6241,
+  "second_order_peak_time_from_trigger_s": -0.012580000000000001,
+  "second_order_samples_above_threshold": 0,
+  "second_order_threshold_exceeded": false
+}

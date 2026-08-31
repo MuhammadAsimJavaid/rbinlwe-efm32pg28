@@ -1,0 +1,11 @@
+fault_id,group,operation,address,target,size,original_semantics,security_question,expected_secure_outcome
+Z01,selection,decrypt-valid,*0x08004332,r5,1,live combined valid mask 0xFF,Does zeroing validity fail closed?,SAFE_REJECTION
+Z02,comparator,decrypt-invalid,*0x0800430e,r7,4,nonzero forward ciphertext difference while reverse difference remains independent,Does zeroing one comparison accumulator still force acceptance?,SAFE_REJECTION
+Z03,decryption,decrypt-valid,*0x0800421a,$sp+16,4,first word of recovered hidden vector,Does corrupted hidden vector trigger verification failure?,SAFE_REJECTION
+Z04,decryption,decrypt-valid,*0x08004250,$sp+80,4,first word of recovered caller message,Does corrupted recovered message trigger verification failure?,SAFE_REJECTION
+Z05,derivation,decrypt-valid,*0x0800425c,$sp+112,4,first word of seed1,Does corrupted deterministic seed trigger rejection?,SAFE_REJECTION
+Z06,derivation,decrypt-valid,*0x08004282,$sp+368,4,first word of expanded coins,Does corrupted re-encryption randomness trigger rejection?,SAFE_REJECTION
+Z07,re_encryption,decrypt-valid,*0x0800429e,$sp+464,4,first word of recomputed c12,Does corrupted recomputed ciphertext trigger rejection?,SAFE_REJECTION
+Z08,comparator,decrypt-valid,*0x080042ae,$sp+208,4,first word of recomputed c4,Does corrupted recomputed tag trigger rejection?,SAFE_REJECTION
+Z09,secret_key,decrypt-valid,*0x08005400,&fi_secret_key.cpa_sk.s[0],4,first four secret coefficients,Does secret-key corruption trigger CCA2 rejection?,SAFE_REJECTION
+Z10,key_generation,keypair,*0x080052e8,$r5,256,complete freshly sampled secret polynomial,Can an all-zero key be generated without detection?,EXPLICIT_ERROR

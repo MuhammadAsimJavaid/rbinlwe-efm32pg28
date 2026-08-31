@@ -1,0 +1,13 @@
+fault_id,process,operation,address,next,instruction,security_property,expected_safe_outcome
+S01,decryption,decrypt-invalid,*0x08004300,0x08004304,forward comparison call,Independent reverse comparison must retain rejection,SAFE_REJECTION
+S02,decryption,decrypt-invalid,*0x0800430c,0x08004310,reverse comparison call,Independent forward comparison must retain rejection,SAFE_REJECTION
+S03,decryption,decrypt-invalid,*0x0800432a,0x0800432e,forward mask materialization,Reverse validity mask must prevent candidate release,SAFE_REJECTION
+S04,decryption,decrypt-invalid,*0x0800432e,0x08004330,reverse mask materialization,Forward validity mask must prevent candidate release,SAFE_REJECTION
+S05,decryption,decrypt-invalid,*0x080043c8,0x080043ca,first selector AND,Second selector AND must force rejection,SAFE_REJECTION
+S06,decryption,decrypt-invalid,*0x080043ca,0x080043cc,second selector AND,First selector AND must force rejection,SAFE_REJECTION
+S07,decryption,decrypt-valid,*0x080043ce,0x080043d2,selector output store,Skipped output write must not expose unauthenticated candidate data,NO_EFFECT_OR_SAFE_FAILURE
+S08,decryption,decrypt-valid,*0x080043d4,0x080043d6,selector loop branch,Premature selector termination must not be silently accepted,NO_EFFECT_OR_SAFE_FAILURE
+S09,encryption,encrypt,*0x0800587a,0x0800587e,hidden-value RNG call,Missing fresh hidden value must cause explicit failure,EXPLICIT_ERROR
+S10,encryption,encrypt,*0x0800590c,0x08005910,ciphertext tag call,Missing authentication tag computation must cause explicit failure,EXPLICIT_ERROR
+S11,key_generation,keypair,*0x08005314,0x08005318,secret sampling call,Structural key validation must reject an ungenerated secret,EXPLICIT_ERROR
+S12,key_generation,keypair,*0x08005814,0x08005816,validated-key acceptance branch,Skipped acceptance must fail closed,EXPLICIT_ERROR

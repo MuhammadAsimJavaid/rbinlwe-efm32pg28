@@ -1,0 +1,25 @@
+* text=auto
+
+*.c text eol=lf
+*.h text eol=lf
+*.S text eol=lf
+*.cmake text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.slcp text eol=lf
+*.slps text eol=lf
+*.pintool text eol=lf
+
+*.png binary
+*.pdf binary
+*.pptx binary
+*.npy binary
+*.npz binary
+*.elf binary
+*.out binary
+*.bin binary
+*.hex binary
+*.s37 binary

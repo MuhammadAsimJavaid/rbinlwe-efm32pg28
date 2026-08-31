@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""Build the five-site 2,612-trial randomization campaign."""
+
+import csv
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent.parent
+MANIFEST = ROOT / "FI_RANDOM_TARGETS.csv"
+GENERATOR = ROOT / "tools" / "fi_generate_gdb.py"
+ELF = ROOT / "cmake_gcc" / "build" / "base" / \
+    "RBLWE_on_EFM32_ShAd_CBD0.out"
+SUITE = ROOT / "fi_results" / "random"
+
+
+def main():
+    if not ELF.exists():
+        raise SystemExit(f"ELF not found: {ELF}")
+
+    SUITE.mkdir(parents=True, exist_ok=True)
+    powershell = [
+        "$ErrorActionPreference = 'Stop'",
+        "$projectRoot = Resolve-Path "
+        f"'{ROOT.as_posix()}'",
+        "Set-Location $projectRoot",
+    ]
+
+    with MANIFEST.open(newline="", encoding="utf-8") as source:
+        targets = list(csv.DictReader(source))
+
+    total = 0
+    for target in targets:
+        fault_id = target["fault_id"].lower()
+        trials = int(target["trials"])
+        total += trials
+        script = SUITE / (fault_id + ".gdb")
+        output_dir = SUITE / fault_id
+        command = [
+            sys.executable, str(GENERATOR),
+            "--model", "random",
+            "--operation", target["operation"],
+            "--trials", str(trials),
+            "--fault-id", str(int(target["fault_id"][1:])),
+            "--at", target["address"],
+            "--size", target["size"],
+            "--seed", target["seed"],
+            "--value-mode", target["value_mode"],
+            "--script", str(script),
+        ]
+        if target["target"].lower() in {
+                "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7",
+                "r8", "r9", "r10", "r11", "r12"}:
+            command.extend(["--register", target["target"]])
+        else:
+            command.extend(["--target", target["target"]])
+        subprocess.run(command, check=True)
+
+        name = f"{fault_id}_{trials}"
+        powershell.extend([
+            "",
+            f"Write-Host 'Running {target['fault_id']} "
+            f"({trials} trials): {target['location']}'",
+            "python tools/fi_batch_runner.py `",
+            f"  --elf '{ELF.relative_to(ROOT).as_posix()}' `",
+            f"  --campaign '{script.relative_to(ROOT).as_posix()}' `",
+            f"  --output-dir '{output_dir.relative_to(ROOT).as_posix()}' `",
+            f"  --name '{name}' `",
+            "  --timeout 7200",
+        ])
+
+    powershell.extend([
+        "",
+        f"Write-Host 'Randomization suite complete: {total} trials requested.'",
+    ])
+    launcher = SUITE / "run_random_suite.ps1"
+    launcher.write_text("\n".join(powershell) + "\n", encoding="utf-8")
+    print(f"Built {len(targets)} campaigns containing {total} trials")
+    print(f"Launcher: {launcher}")
+
+
+if __name__ == "__main__":
+    main()

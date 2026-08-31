@@ -1,0 +1,6 @@
+fault_id,location,operation,address,target,size,trials,value_mode,seed,security_question
+R01,selector forward mask,decrypt-invalid,*0x080043b4,r3,1,256,exhaustive-byte,101,Can corruption of the forward selection mask bypass rejection when the reverse mask remains independent?
+R02,selector reverse mask,decrypt-invalid,*0x080043b4,$sp,1,256,exhaustive-byte,102,Can corruption of the reverse selection mask bypass rejection when the forward mask remains independent?
+R03,forward comparison accumulator,decrypt-invalid,*0x08004310,r9,4,1000,random,103,Can randomizing the forward ciphertext difference bypass the independent reverse comparison?
+R04,reverse comparison accumulator,decrypt-invalid,*0x08004310,r0,4,1000,random,104,Can randomizing the reverse ciphertext difference bypass the independent forward comparison?
+R05,decryption hidden vector word,decrypt-valid,*0x0800421a,$sp+16,4,100,random,105,Does random corruption of a valid decryption intermediate fail safely?
