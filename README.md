@@ -143,25 +143,34 @@ the inputs for regenerating them on the target setup.
 
 ## Citation
 
-Replace the placeholders below with the final paper metadata and repository
-URL before publication:
+If you use this implementation or the accompanying experimental artifacts in academic work, please cite the associated paper:
 
 ```bibtex
-@misc{rbinlwe_efm32pg28,
-  author       = {AUTHOR NAMES},
-  title        = {Fault- and Side-Channel-Aware RBin-LWE on EFM32PG28},
-  year         = {2026},
-  howpublished = {Software artifact},
-  url          = {PUBLIC REPOSITORY URL},
-  note         = {Commit or release: VERSION IDENTIFIER}
+@article{javaid2026efficient,
+  author  = {Muhammad Asim Javaid and Muhammad Adeel Pasha and Muhammad Ali Siddiqi},
+  title   = {Efficient and Implementation-Hardened RBLWE on Commodity Cortex-M Microcontrollers},
+  journal = {arXiv preprint arXiv:2610.07820},
+  year    = {2026},
+  doi     = {10.48550/arXiv.2610.07820},
+  url     = {https://arxiv.org/abs/2610.07820}
 }
 ```
 
+The corresponding implementation and reproducibility artifacts are available at:
+
+```text
+https://github.com/MuhammadAsimJavaid/rbinlwe-efm32pg28
+```
+
+For reproducibility, please also record the repository commit or release used in your experiments.
+
 ## License
 
-No software license has yet been selected for this publication copy. Until a
-`LICENSE` file is added, copyright remains with the authors and reuse rights
-are not granted. Select a license compatible with the paper, university
-policy, and Silicon Labs SDK-generated material before announcing the public
-repository.
+Copyright (c) 2026 Muhammad Asim Javaid, Muhammad Adeel Pasha, and Muhammad Ali Siddiqi.
+
+A software license for the authors' original source code will be specified separately.
+
+This repository also contains generated configuration and support files associated with the Silicon Labs development environment. Such third-party or vendor-generated material remains subject to its respective copyright and licensing terms and is not relicensed by the authors of this repository.
+
+The accompanying research paper is distributed separately through arXiv and is subject to the license stated on its arXiv record.
 
