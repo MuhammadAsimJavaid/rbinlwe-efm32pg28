@@ -134,8 +134,13 @@ serial number or claim that a source-level site maps to a stable address.
   files.
 - `tvla_results/` contains selected first- and second-order summary JSON files
   and plots, including both threshold-passing and threshold-exceeding results.
-  Paths, device identifiers, raw traces, partial captures, and capture logs
-  have been excluded from the public release.
+  See `tvla_results/README.md` for provenance. The authoritative masked-decoding
+  result matching the paper table is `masked-decode_20260830_121458/` (5,000
+  traces, max first-order `|t|=3.320`). The earlier
+  `masked-decode_combined_10k_20260829/` folder is retained as archived
+  exploratory evidence and is not the manuscript result. Paths, device
+  identifiers, raw traces, partial captures, and capture logs have been
+  excluded from the public release.
 
 Raw UART logs, oscilloscope arrays, debugger transcripts, ELF/map files, and
 generated build trees are not versioned. The checked-in firmware and tools are
