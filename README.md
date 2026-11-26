@@ -34,6 +34,7 @@ corresponding `.pintool` file.
 | `benchmark_results/` | Curated cycle and memory-footprint summaries |
 | `fi_results/` | Curated fault-injection summaries |
 | `tvla_results/` | Curated statistical summaries and plots; raw oscilloscope traces are intentionally omitted |
+| `attachments/mlkem512_efm32pg28/` | Same-platform FIPS 203 ML-KEM-512 (PQClean clean) companion benchmark |
 | `PARAMETER_SETS.md` | Parameter-set and compile-time option reference |
 | `BENCHMARK_CAMPAIGN.md` | Benchmark methodology and output schema |
 | `CONSTANT_TIME_ANALYSIS.md` | Timing-test methodology and evaluated claims |
@@ -127,20 +128,23 @@ serial number or claim that a source-level site maps to a stable address.
 
 ## Reproducibility artifacts
 
-- `benchmark_results/20260824_223723/` contains the curated combined-campaign
-  cycle summary and linked-memory footprint table.
-- `fi_results/` contains compact baseline, instruction-skip, and randomized
-  campaign summaries. Target manifests are the top-level `FI_*_TARGETS.csv`
-  files.
-- `tvla_results/` contains selected first- and second-order summary JSON files
-  and plots, including both threshold-passing and threshold-exceeding results.
-  See `tvla_results/README.md` for provenance. The authoritative masked-decoding
-  result matching the paper table is `masked-decode_20260830_121458/` (5,000
-  traces, max first-order `|t|=3.320`). The earlier
-  `masked-decode_combined_10k_20260829/` folder is retained as archived
-  exploratory evidence and is not the manuscript result. Paths, device
-  identifiers, raw traces, partial captures, and capture logs have been
-  excluded from the public release.
+Use the folders below as the manuscript provenance map. Prefer the
+authoritative paths; archived folders are retained only for audit history.
+
+| Manuscript claim | Authoritative artifact |
+|---|---|
+| Set-1 CCA2/fault and shared-CPA cycle/memory tables (post-selector fix) | `benchmark_results/postfix_cca2_20261119_172218/` |
+| Full multi-set combined campaign (pre-selector refresh matrix) | `benchmark_results/20260824_223723/` |
+| Instruction-skip campaign after selector hardening | `fi_results/skip/skip_36_summary.md` |
+| Pre-fix skip residual (S07/S08 silent corruption) | `fi_results/skip_pre_fix_archive/skip_36_summary.md` |
+| Table IV masked decoding (`max \|t\|=3.320`) | `tvla_results/masked-decode_20260830_121458/` |
+| Exploratory combined 10k TVLA (not the paper number) | `tvla_results/masked-decode_combined_10k_20260829/` |
+| Same-platform ML-KEM-512 comparison (100 trials) | `attachments/mlkem512_efm32pg28/benchmark_results/20261111_130800/` |
+
+- Target manifests for FI campaigns are the top-level `FI_*_TARGETS.csv` files.
+- See `tvla_results/README.md` and `fi_results/README.md` for campaign notes.
+- Paths, device identifiers, raw oscilloscope traces, partial captures, and
+  capture logs are excluded from the public release.
 
 Raw UART logs, oscilloscope arrays, debugger transcripts, ELF/map files, and
 generated build trees are not versioned. The checked-in firmware and tools are

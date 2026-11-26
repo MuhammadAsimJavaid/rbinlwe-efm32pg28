@@ -10,8 +10,8 @@
 | skip | decrypt-invalid | 4 |  | 1 | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | protected in tested model |
 | skip | decrypt-invalid | 5 |  | 1 | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | protected in tested model |
 | skip | decrypt-invalid | 6 |  | 1 | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | protected in tested model |
-| skip | decrypt-valid | 7 |  | 1 | 3 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | functional vulnerability |
-| skip | decrypt-valid | 8 |  | 1 | 3 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | functional vulnerability |
+| skip | decrypt-valid | 7 |  | 1 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no observed effect |
+| skip | decrypt-valid | 8 |  | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | protected in tested model |
 | skip | encrypt | 10 |  | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | protected in tested model |
 | skip | encrypt | 9 |  | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | protected in tested model |
 | skip | keypair | 11 |  | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | protected in tested model |
@@ -21,4 +21,4 @@
 
 | Fault type | Trials | No effect | Safe rejection | Explicit error | Crash/hang | Silent | Bypass | Weak key | Missed | 95% upper bound when no bypass/weak key |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| skip | 36 | 0 | 18 | 12 | 0 | 6 | 0 | 0 | 0 | 8.333% |
+| skip | 36 | 3 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 8.333% |

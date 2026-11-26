@@ -1,0 +1,4 @@
+﻿scheme,implementation,operation,min_cycles,avg_cycles,trials
+ML-KEM-512,PQClean-clean-FIPS203,keygen,836361,837415,100
+ML-KEM-512,PQClean-clean-FIPS203,encap,959860,960935,100
+ML-KEM-512,PQClean-clean-FIPS203,decap,1168378,1169437,100

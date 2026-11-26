@@ -97,6 +97,10 @@ masked_refresh_poly:
  * The two masks deliberately remain separate through two distinct AND
  * instructions. A single skipped AND or corruption of one mask cannot release
  * candidate data for an invalid ciphertext while the other mask remains zero.
+ *
+ * The selected byte is stored twice and read back before the pointer advances.
+ * After the loop, remaining-count and written-length checks must both pass;
+ * otherwise the output buffer is wiped and the routine returns -1.
  */
     .section .text.pke_select_msg_hardened, "ax", %progbits
     .align 2
@@ -107,6 +111,7 @@ pke_select_msg_hardened:
     push    {r4-r7, lr}
     ldr     r4, [sp, #20]       /* reverse mask */
     ldr     r5, [sp, #24]       /* message length */
+    push    {r0, r5}            /* out base, expected length */
     uxtb    r3, r3              /* forward mask */
     uxtb    r4, r4              /* reverse mask */
 
@@ -117,10 +122,44 @@ pke_select_msg_hardened:
     ands    r6, r3              /* independent forward authorization */
     ands    r6, r4              /* independent reverse authorization */
     eors    r6, r7
-    strb    r6, [r0], #1
+    strb    r6, [r0]            /* first output store */
+    strb    r6, [r0]            /* duplicate output store */
+    ldrb    r7, [r0]            /* verify readback */
+    cmp     r7, r6
+    bne     2f
+    adds    r0, r0, #1
     subs    r5, r5, #1
     bne     1b
 
+    cmp     r5, #0              /* loop must fully exhaust */
+    bne     2f
+    cmp     r5, #0              /* duplicated completion check */
+    bne     2f
+    ldr     r6, [sp, #0]        /* out base */
+    ldr     r7, [sp, #4]        /* expected length */
+    subs    r6, r0, r6
+    cmp     r6, r7
+    bne     2f
+
+    movs    r0, #0              /* success */
+    b       3f
+
+2:
+    ldr     r0, [sp, #0]        /* wipe output on integrity failure */
+    ldr     r1, [sp, #4]
+    movs    r2, #0
+4:
+    cmp     r1, #0
+    beq     5f
+    strb    r2, [r0], #1
+    subs    r1, r1, #1
+    bne     4b
+5:
+    movs    r0, #0
+    mvns    r0, r0              /* return -1 */
+
+3:
+    add     sp, #8
     movs    r3, #0
     movs    r4, #0
     movs    r5, #0

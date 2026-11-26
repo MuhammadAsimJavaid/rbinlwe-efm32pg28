@@ -392,12 +392,12 @@ static int pke_secret_key_is_structurally_valid(const rlwe_seckey_t *sk)
 #endif
 }
 
-void pke_select_msg_hardened(uint8_t *out,
-                             const uint8_t *valid,
-                             const uint8_t *reject,
-                             uint32_t mask_forward,
-                             uint32_t mask_reverse,
-                             size_t length);
+int pke_select_msg_hardened(uint8_t *out,
+                            const uint8_t *valid,
+                            const uint8_t *reject,
+                            uint32_t mask_forward,
+                            uint32_t mask_reverse,
+                            size_t length);
 
 static int pke_reject_msg(const uint8_t z[RLWE_CCA2_PKE_REJECT_BYTES],
                           const uint8_t hc[RLWE_CCA2_PKE_HASH_BYTES],
@@ -550,9 +550,12 @@ int rlwe_cca2_pke_decrypt(uint8_t msg[RLWE_MSG_BYTES],
         recovered, reject,
         (uint8_t)(valid_mask_forward & valid_mask_reverse));
 #endif
-    pke_select_msg_hardened(msg, recovered, reject,
-                            valid_mask_forward, valid_mask_reverse,
-                            RLWE_MSG_BYTES);
+    if (pke_select_msg_hardened(msg, recovered, reject,
+                                valid_mask_forward, valid_mask_reverse,
+                                RLWE_MSG_BYTES) != 0) {
+        memset(msg, 0, RLWE_MSG_BYTES);
+        rc = -1;
+    }
 
     memset(&check_c12, 0, sizeof(check_c12));
     memset(hidden_v, 0, sizeof(hidden_v));

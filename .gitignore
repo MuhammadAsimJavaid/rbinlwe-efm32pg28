@@ -61,6 +61,8 @@ env/
 
 # Editors and Silicon Labs machine-local state
 .vscode/
+.cursor/
+.codex/
 .idea/
 *.code-workspace
 .uceditor/
@@ -68,6 +70,7 @@ env/
 .silabsExtContext
 .projectlinkstore
 .projectchecksums
+vscode.conf
 *.suo
 *.user
 *.userosscache
@@ -91,6 +94,9 @@ history.txt
 *ChatGPT*
 *Claude*
 *Codex*
+*codex*
+AGENTS.md
+AGENTS-*.md
 drafts/
 paper/
 reviewer_notes/

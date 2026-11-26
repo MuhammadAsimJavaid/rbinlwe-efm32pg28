@@ -1,0 +1,2 @@
+scheme,implementation,text_bytes,data_bytes,bss_bytes,stack_bytes,heap_reservation_bytes,flash_bytes,ram_without_heap_bytes,linked_ram_bytes,elf_file_bytes
+ML-KEM-512,PQClean-clean,37444,160,6840,16384,238760,37604,23384,262144,1038560

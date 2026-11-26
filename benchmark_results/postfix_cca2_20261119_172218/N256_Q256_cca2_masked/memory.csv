@@ -1,0 +1,2 @@
+parameter_set,stage,text_bytes,data_bytes,bss_bytes,stack_bytes,heap_reservation_bytes,flash_bytes,ram_without_heap_bytes,linked_ram_bytes,elf_file_bytes
+N256_Q256,cca2_masked,30096,160,5412,8192,248380,30256,13764,262144,1013964

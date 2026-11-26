@@ -1,0 +1,14 @@
+build/
+cmake_gcc/build*/
+*.out
+*.hex
+*.bin
+*.map
+*.elf
+.vscode/
+.cursor/
+.codex/
+.silabsExtContext
+vscode.conf
+__pycache__/
+.venv/
